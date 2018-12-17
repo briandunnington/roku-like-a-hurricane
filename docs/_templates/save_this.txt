@@ -1,0 +1,59 @@
+﻿ENUMERATE CATEGORIES:
+---------------------------------------
+
+                @{
+                    var categories = @Model.Pages.Where((p) => p.Link.Contains("/category/")).OrderByDescending((p) => p.OriginalFileName);
+                }
+                @foreach (var category in categories)
+                {
+                    {
+                        if (category.Contains("Thumbnail"))
+                        {
+                            <p><a href="@category.Link" class="thumbnail"><img src="@category.Thumbnail" /></a></p>
+                        }
+                    }
+                    <h4 class="pageTitle">@category.OriginalFileName</h4>
+                    <p><a class="btn btn-default" href="@category.Link">Read more &raquo;</a></p>
+                    <hr />
+                }
+
+
+
+ENUMERATE TAGS:
+---------------------------------------
+                @{
+                    var taglist = new Dictionary<string, List<dynamic>>();
+                    foreach (var post in @Model.Posts)
+                    {
+                        if (post.Contains("Tags"))
+                        {
+                            var tags = ((string)post.Tags).Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).Select((t) =>
+                            {
+                                return t.Trim();
+                            });
+                            foreach (var tag in tags)
+                            {
+                                if (!taglist.ContainsKey(tag))
+                                {
+                                    taglist.Add(tag, new List<dynamic>());
+                                }
+                                var list = taglist[tag];
+                                list.Add(post);
+                            }
+                        }
+                    }
+                }
+                @foreach (var item in taglist)
+                {
+                    <h6>@item.Key</h6>
+                    foreach (var post in item.Value)
+                    {
+                        if (post.Contains("Thumbnail"))
+                        {
+                            <p><a href="@post.Link" class="thumbnail"><img src="@post.Thumbnail" /></a></p>
+                        }
+                        <h4 class="pageTitle">@post.Title</h4>
+                        <p><a class="btn btn-default" href="@post.Link">Read more &raquo;</a></p>
+                        <hr />
+                    }
+                }

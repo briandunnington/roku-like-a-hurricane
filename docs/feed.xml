@@ -1,0 +1,187 @@
+<?xml version="1.0" ?>
+
+<rss version="2.0">
+    <channel>
+        <title>Roku Like A Hurricane</title>
+        <link>http://192.168.1.139:52757</link>
+        <description>rokulikeahurricane.io RSS Feed</description>
+        <language>en-us</language>
+        <copyright>Copyright 2019 - Brian Dunnington</copyright>
+        <pubDate>Mon, 17 Dec 2018 10:46:53 GMT</pubDate>
+        <lastBuildDate>Mon, 17 Dec 2018 10:46:53 GMT</lastBuildDate>
+
+        <item>
+            <title>A Different Kind of &#39;Rule of Thirds&#39;</title>
+            <link>http://192.168.1.139:52757/divisible_by_3.html</link>
+            <description><![CDATA[
+<p>Roku devices <a href="https://sdkdocs.roku.com/display/sdkdoc/Specifying+Display+Resolution">support a few different resolutions</a> for displaying your app's UI:</p>
+
+<ul>
+<li>FHD (1920x1080)</li>
+<li>HD (1280x720)</li>
+<li>SD (720x480)</li>
+</ul>
+
+<p><em>NOTE: This post is only going to focus on FHD and HD. Since SD is a different aspect ratio (4:3) and most Roku devices cannot output SD anyway, it is usually easier to omit explict support and let the Roku autoscale the UI to handle SD.</em></p>
+
+<p>Although you can provide explicit layouts for both HD and FHD, a much more common approach is to only provide the FHD layout and let the Roku downscale the UI to handle HD automatically. To do this, simply add this to your <code>manifest</code> file:</p>
+
+<p><code>ui_resolutions=FHD</code></p>
+
+<p>Now, you can simply use a 1920x1080 grid when specifying your UI dimensions and Roku will automatically handle converting it to HD as necessary. In order to autoscale the UI down, all of the dimensions are essentially multiplied by 2/3. So an element that is half-a-screen wide in and FHD app would be specified as 960 (1920/2), but would correctly render at 640 (960 * 2/3) on an HD screen.</p>
+
+<p>However, there is a catch with this approach. Since everything is multiplied by 2/3, the original element dimensions must always be divisible by 3 to avoid rounding issues. Consider the following layout which renders a 3x3 grid - it is 597px wide (<a href="http://www.aaamath.com/div66_x3.htm">which is divisible by 3 since 5+9+7=12, which is divisible by 3</a>) and thus each square is 199x199:</p>
+
+<pre class="  language-markup"><code class="  language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Rectangle</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>597<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>597<span class="token punctuation">"</span></span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0xFFFFFF<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Rectangle</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>199<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>199<span class="token punctuation">"</span></span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0xFF0000<span class="token punctuation">"</span></span> <span class="token attr-name">translation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[0,0]<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Rectangle</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>199<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>199<span class="token punctuation">"</span></span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0x00FF00<span class="token punctuation">"</span></span> <span class="token attr-name">translation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[199,0]<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Rectangle</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>199<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>199<span class="token punctuation">"</span></span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0xFF0000<span class="token punctuation">"</span></span> <span class="token attr-name">translation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[398,0]<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Rectangle</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>199<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>199<span class="token punctuation">"</span></span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0x00FF00<span class="token punctuation">"</span></span> <span class="token attr-name">translation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[0,199]<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Rectangle</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>199<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>199<span class="token punctuation">"</span></span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0xFF0000<span class="token punctuation">"</span></span> <span class="token attr-name">translation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[199,199]<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Rectangle</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>199<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>199<span class="token punctuation">"</span></span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0x00FF00<span class="token punctuation">"</span></span> <span class="token attr-name">translation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[398,199]<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Rectangle</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>199<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>199<span class="token punctuation">"</span></span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0xFF0000<span class="token punctuation">"</span></span> <span class="token attr-name">translation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[0,399]<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Rectangle</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>199<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>199<span class="token punctuation">"</span></span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0x00FF00<span class="token punctuation">"</span></span> <span class="token attr-name">translation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[199,398]<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Rectangle</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>199<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>199<span class="token punctuation">"</span></span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0xFF0000<span class="token punctuation">"</span></span> <span class="token attr-name">translation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[398,398]<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Rectangle</span><span class="token punctuation">&gt;</span></span></code></pre>
+
+<p><img src="/.img/divisible_by_3_1.png" style="width: 600px;" /></p>
+
+<p>If you look closely, you can see there are some white lines along the right edge of the grid. Zooming in on the image, we can see:</p>
+
+<p><img src="/.img/divisible_by_3_2.png" style="width: 600px;" /></p>
+
+<p>The squares are not lining up correctly since 199 is not divisible by 3. Let's work through what is going on.</p>
+
+<ul>
+<li>The overall grid is 597x597 which is divisible by 3. The HD grid should end up 597 * 2/3 = 398px wide</li>
+<li>In order to make a 3x3 grid, each square is 199x199 - 199 is <em>not</em> divisible by 3</li>
+<li>199 * 2/3 = 132.66666667 which gets rendered as 132</li>
+<li>The top left square ends up 132x132 at position 0,0</li>
+<li>The top middle square ends up rendered at position 132,0 so there is no gap</li>
+<li>The top right square should have been rendered at 398,0, which converts to 265 in HD. But since the first two squares were only 132 each, they only take up 264px so there ends up being a 1px gap between the second and third columns.</li>
+<li>Same thing happens between the second and third rows</li>
+<li>The top right square gets positioned at 265, but since it is only 132px wide, it only fills in to 397, leaving a 1px gap along the right edge (same along the bottom row)</li>
+</ul>
+
+<p>So if we adjust our dimensions so that each individual square is divisible by 3 in both dimensions, we get:</p>
+
+<pre class="  language-markup"><code class="  language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Rectangle</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>603<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>603<span class="token punctuation">"</span></span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0xFFFFFF<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Rectangle</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>201<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>201<span class="token punctuation">"</span></span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0xFF0000<span class="token punctuation">"</span></span> <span class="token attr-name">translation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[0,0]<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Rectangle</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>201<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>201<span class="token punctuation">"</span></span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0x00FF00<span class="token punctuation">"</span></span> <span class="token attr-name">translation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[201,0]<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Rectangle</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>201<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>201<span class="token punctuation">"</span></span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0xFF0000<span class="token punctuation">"</span></span> <span class="token attr-name">translation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[402,0]<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Rectangle</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>201<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>201<span class="token punctuation">"</span></span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0x00FF00<span class="token punctuation">"</span></span> <span class="token attr-name">translation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[0,201]<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Rectangle</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>201<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>201<span class="token punctuation">"</span></span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0xFF0000<span class="token punctuation">"</span></span> <span class="token attr-name">translation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[201,201]<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Rectangle</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>201<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>201<span class="token punctuation">"</span></span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0x00FF00<span class="token punctuation">"</span></span> <span class="token attr-name">translation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[402,201]<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Rectangle</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>201<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>201<span class="token punctuation">"</span></span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0xFF0000<span class="token punctuation">"</span></span> <span class="token attr-name">translation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[0,402]<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Rectangle</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>201<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>201<span class="token punctuation">"</span></span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0x00FF00<span class="token punctuation">"</span></span> <span class="token attr-name">translation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[201,402]<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Rectangle</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>201<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>201<span class="token punctuation">"</span></span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0xFF0000<span class="token punctuation">"</span></span> <span class="token attr-name">translation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[402,402]<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Rectangle</span><span class="token punctuation">&gt;</span></span></code></pre>
+
+<p><img src="/.img/divisible_by_3_3.png" style="width: 600px;" /></p>
+
+<p>Here are the two grids side by side for comparison:</p>
+
+<p><img src="/.img/divisible_by_3_4.png" style="width: 600px;" /></p>
+
+<p>Note that this applies to all UI dimensions, not just <code>width</code> and <code>height</code>. An property that specifies a UI dimension is affected, including <code>translation</code> and <code>scale</code>. <code>scale</code> is particularly tricky because the resulting post-scaled dimension must be divisible by 3. So:</p>
+
+<ul>
+<li>600 ✔️ with <code>scale</code> of <code>0.8</code> = 480 ✔️ * 2/3 = 320 ✔️</li>
+<li>597 ✔️ with <code>scale</code> of <code>0.8</code> = 477.6 ❌</li>
+</ul>
+
+]]></description>
+            <pubDate>Mon, 17 Dec 2018 12:00:00 GMT</pubDate>
+            <guid>http://192.168.1.139:52757/divisible_by_3.html</guid>
+        </item>
+        <item>
+            <title>Poster component property order</title>
+            <link>http://192.168.1.139:52757/poster_property_order.html</link>
+            <description><![CDATA[
+<p>Often when loading images from the web, we do not have control over how large the source images are. Loading images
+that are too large will eat up precious Roku memory and cause performance problems in your app.</p>
+
+<p>However, the <code>Poster</code> component does have the ability to automatically resize the incoming image as it is loaded so
+that no excess memory is used. The <a href="https://sdkdocs.roku.com/display/sdkdoc/Poster">Roku docs</a> indicate that you can use the following
+properties to control how the image is loaded into memory:</p>
+
+<ul>
+<li><code>loadWith</code></li>
+<li><code>loadHeight</code></li>
+<li><code>loadDisplayMode</code></li>
+</ul>
+
+<p>By using these properties, you can load an image that is normally too large but only consume the memory required for the
+desired final size. For example:</p>
+
+<pre class="  language-markup"><code class="  language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Poster</span> <span class="token attr-name">uri</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://big.image<span class="token punctuation">"</span></span> <span class="token attr-name">loadDisplayMode</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>scaleToZoom<span class="token punctuation">"</span></span> <span class="token attr-name">loadWidth</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>720<span class="token punctuation">"</span></span> <span class="token attr-name">loadHeight</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>405<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span></code></pre>
+
+<p>If you view the <a href="https://sdkdocs.roku.com/display/sdkdoc/Texture+Memory">texture memory</a>, you can see:</p>
+
+<p><img src="/.img/poster_properties_1.png" /></p>
+
+<p>But wait - why does it report that the image is 1920x1080 if we specified it to be 720x405? The Roku docs actually mention
+the reason, but it is not always immediately obvious:</p>
+
+<blockquote>
+  <p>In order for the load scaling options to work, the option fields must be set in XML markup before the <code>uri</code> field.</p>
+</blockquote>
+
+<p>What that means is that <strong>property source order is important</strong>. As soon as the <code>uri</code> field is set, the image begins loading
+with whatever options have been set. If the <code>load*</code> properties have not been set yet, they will be ignored. So we need to
+change our markup to ensure that the <code>uri</code> is set <em>after</em> the other properties:</p>
+
+<pre class="  language-markup"><code class="  language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Poster</span> <span class="token attr-name">loadDisplayMode</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>scaleToZoom<span class="token punctuation">"</span></span> <span class="token attr-name">loadWidth</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>720<span class="token punctuation">"</span></span> <span class="token attr-name">loadHeight</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>405<span class="token punctuation">"</span></span> <span class="token attr-name">uri</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://big.image<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span></code></pre>
+
+<p>Now when you view the texture memory, you see:</p>
+
+<p><img src="/.img/poster_properties_2.png" /></p>
+
+<p>That looks more like it. Even though the Roku docs mention this, it catches lots of folks off guard since xml property order is normally not significant.</p>
+
+]]></description>
+            <pubDate>Mon, 17 Dec 2018 12:00:00 GMT</pubDate>
+            <guid>http://192.168.1.139:52757/poster_property_order.html</guid>
+        </item>
+        <item>
+            <title>Patterns</title>
+            <link>http://192.168.1.139:52757/categories/patterns.html</link>
+            <description><![CDATA[
+<p>[this page will list all in the category]</p>
+
+]]></description>
+            <pubDate>Mon, 17 Dec 2018 12:00:00 GMT</pubDate>
+            <guid>http://192.168.1.139:52757/categories/patterns.html</guid>
+        </item>
+        <item>
+            <title>Performance</title>
+            <link>http://192.168.1.139:52757/categories/performance.html</link>
+            <description><![CDATA[
+<p>[this page will list all in the category]</p>
+
+]]></description>
+            <pubDate>Mon, 17 Dec 2018 12:00:00 GMT</pubDate>
+            <guid>http://192.168.1.139:52757/categories/performance.html</guid>
+        </item>
+        <item>
+            <title>Tips</title>
+            <link>http://192.168.1.139:52757/categories/tips.html</link>
+            <description><![CDATA[
+<p>[this page will list all in the category]</p>
+
+]]></description>
+            <pubDate>Mon, 17 Dec 2018 12:00:00 GMT</pubDate>
+            <guid>http://192.168.1.139:52757/categories/tips.html</guid>
+        </item>
+        <item>
+            <title>Tools</title>
+            <link>http://192.168.1.139:52757/categories/tools.html</link>
+            <description><![CDATA[
+<p>[this page will list all in the category]</p>
+
+]]></description>
+            <pubDate>Mon, 17 Dec 2018 12:00:00 GMT</pubDate>
+            <guid>http://192.168.1.139:52757/categories/tools.html</guid>
+        </item>
+    </channel>
+</rss>

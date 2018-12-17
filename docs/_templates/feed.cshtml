@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" ?>
+@model Nest.SiteData
+@{
+    HtmlEncode = true;
+    var now = DateTime.UtcNow;
+    var siteRoot = "https://rokulikeahurricane.io";
+    siteRoot = "http://192.168.1.139:52757"; //TODO
+}
+<rss version="2.0">
+    <channel>
+        <title>@Model.CurrentItem.Title</title>
+        @Raw("<link>" + siteRoot + "</link>")
+        <description>@Model.CurrentItem.Summary</description>
+        <language>en-us</language>
+        <copyright>Copyright 2019 - Brian Dunnington</copyright>
+        <pubDate>@now.ToString("ddd, dd MMM yyyy hh:mm:ss 'GMT'")</pubDate>
+        <lastBuildDate>@now.ToString("ddd, dd MMM yyyy hh:mm:ss 'GMT'")</lastBuildDate>
+
+        @foreach (var post in @Model.Posts.OrderByDescending((p) => p.Date))
+        {
+        var link = siteRoot + post.Link;
+        var mainimagehtml = "";
+        if(post.Contains("MainImage")) {
+            var mainimagesrc = siteRoot + post.MainImage;
+            mainimagehtml = String.Format("<div><img src='{0}' style='max-width:100%;height:auto;' /></div>", mainimagesrc);
+        }
+        <item>
+            <title>@post.Title</title>
+            @Raw(String.Format("<link>{0}</link>", link))
+            @Raw(String.Format("<description><![CDATA[\r\n{0}{1}\r\n]]></description>", mainimagehtml, post.Content))
+            <pubDate>@post.Date.ToString("ddd, dd MMM yyyy hh:mm:ss 'GMT'")</pubDate>
+            <guid>@link</guid>
+            @if (post.Contains("Thumbnail"))
+            {
+            <image>@(siteRoot + post.Thumbnail)</image>
+            }
+        </item>
+        }
+    </channel>
+</rss>
