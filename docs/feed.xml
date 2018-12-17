@@ -7,8 +7,8 @@
         <description>rokulikeahurricane.io RSS Feed</description>
         <language>en-us</language>
         <copyright>Copyright 2019 - Brian Dunnington</copyright>
-        <pubDate>Mon, 17 Dec 2018 10:46:53 GMT</pubDate>
-        <lastBuildDate>Mon, 17 Dec 2018 10:46:53 GMT</lastBuildDate>
+        <pubDate>Mon, 17 Dec 2018 11:29:03 GMT</pubDate>
+        <lastBuildDate>Mon, 17 Dec 2018 11:29:03 GMT</lastBuildDate>
 
         <item>
             <title>A Different Kind of &#39;Rule of Thirds&#39;</title>
@@ -44,11 +44,11 @@
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Rectangle</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>199<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>199<span class="token punctuation">"</span></span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0xFF0000<span class="token punctuation">"</span></span> <span class="token attr-name">translation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[398,398]<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Rectangle</span><span class="token punctuation">&gt;</span></span></code></pre>
 
-<p><img src="/.img/divisible_by_3_1.png" style="width: 600px;" /></p>
+<p><img src="/img/divisible_by_3_1.png" style="width: 600px;" /></p>
 
 <p>If you look closely, you can see there are some white lines along the right edge of the grid. Zooming in on the image, we can see:</p>
 
-<p><img src="/.img/divisible_by_3_2.png" style="width: 600px;" /></p>
+<p><img src="/img/divisible_by_3_2.png" style="width: 600px;" /></p>
 
 <p>The squares are not lining up correctly since 199 is not divisible by 3. Let's work through what is going on.</p>
 
@@ -77,11 +77,11 @@
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Rectangle</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>201<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>201<span class="token punctuation">"</span></span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0xFF0000<span class="token punctuation">"</span></span> <span class="token attr-name">translation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[402,402]<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Rectangle</span><span class="token punctuation">&gt;</span></span></code></pre>
 
-<p><img src="/.img/divisible_by_3_3.png" style="width: 600px;" /></p>
+<p><img src="/img/divisible_by_3_3.png" style="width: 600px;" /></p>
 
 <p>Here are the two grids side by side for comparison:</p>
 
-<p><img src="/.img/divisible_by_3_4.png" style="width: 600px;" /></p>
+<p><img src="/img/divisible_by_3_4.png" style="width: 600px;" /></p>
 
 <p>Note that this applies to all UI dimensions, not just <code>width</code> and <code>height</code>. An property that specifies a UI dimension is affected, including <code>translation</code> and <code>scale</code>. <code>scale</code> is particularly tricky because the resulting post-scaled dimension must be divisible by 3. So:</p>
 
@@ -118,7 +118,7 @@ desired final size. For example:</p>
 
 <p>If you view the <a href="https://sdkdocs.roku.com/display/sdkdoc/Texture+Memory">texture memory</a>, you can see:</p>
 
-<p><img src="/.img/poster_properties_1.png" /></p>
+<p><img src="/img/poster_properties_1.png" /></p>
 
 <p>But wait - why does it report that the image is 1920x1080 if we specified it to be 720x405? The Roku docs actually mention
 the reason, but it is not always immediately obvious:</p>
@@ -135,7 +135,7 @@ change our markup to ensure that the <code>uri</code> is set <em>after</em> the 
 
 <p>Now when you view the texture memory, you see:</p>
 
-<p><img src="/.img/poster_properties_2.png" /></p>
+<p><img src="/img/poster_properties_2.png" /></p>
 
 <p>That looks more like it. Even though the Roku docs mention this, it catches lots of folks off guard since xml property order is normally not significant.</p>
 

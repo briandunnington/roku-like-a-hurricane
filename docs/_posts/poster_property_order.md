@@ -21,7 +21,7 @@ desired final size. For example:
 
 If you view the [texture memory][TextureMemory], you can see:
 
-<img src="/.img/poster_properties_1.png" />
+<img src="/img/poster_properties_1.png" />
 
 But wait - why does it report that the image is 1920x1080 if we specified it to be 720x405? The Roku docs actually mention
 the reason, but it is not always immediately obvious:
@@ -36,7 +36,7 @@ change our markup to ensure that the `uri` is set *after* the other properties:
 
 Now when you view the texture memory, you see:
 
-<img src="/.img/poster_properties_2.png" />
+<img src="/img/poster_properties_2.png" />
 
 That looks more like it. Even though the Roku docs mention this, it catches lots of folks off guard since xml property order is normally not significant.
 

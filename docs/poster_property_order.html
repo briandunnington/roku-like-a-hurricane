@@ -27,11 +27,11 @@
     <meta property="twitter:image" content="https://metatags.io/assets/meta-tags-16a33a6a8531e519cc0936fbba0ad904e52d35f34a46c97a2c9f6f7dd7d336f2.png"/>
 
     <link rel="canonical" href="https://rokulikeahurricane.io" />
-    <link rel="stylesheet" href="/.css/style.css"/>
-    <link rel="stylesheet" href="/.css/prism.css"/>
-    <link rel="icon" type="image/png" sizes="32x32" href="/.img/favicon-32x32.png"/>
-    <link rel="icon" type="image/png" sizes="16x16" href="/.img/favicon-16x16.png"/>
-    <link rel="apple-touch-icon" sizes="180x180" href="/.img/favicon-32x32.png"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/prism.css"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon-32x32.png"/>
     <link type="application/atom+xml" rel="alternate" href="https://rokulikeahurricane.io/feed.xml" title="Tale" />
 </head>
 
@@ -82,7 +82,7 @@ desired final size. For example:</p>
 
 <p>If you view the <a href="https://sdkdocs.roku.com/display/sdkdoc/Texture+Memory">texture memory</a>, you can see:</p>
 
-<p><img src="/.img/poster_properties_1.png" /></p>
+<p><img src="/img/poster_properties_1.png" /></p>
 
 <p>But wait - why does it report that the image is 1920x1080 if we specified it to be 720x405? The Roku docs actually mention
 the reason, but it is not always immediately obvious:</p>
@@ -99,7 +99,7 @@ change our markup to ensure that the <code>uri</code> is set <em>after</em> the 
 
 <p>Now when you view the texture memory, you see:</p>
 
-<p><img src="/.img/poster_properties_2.png" /></p>
+<p><img src="/img/poster_properties_2.png" /></p>
 
 <p>That looks more like it. Even though the Roku docs mention this, it catches lots of folks off guard since xml property order is normally not significant.</p>
 </div>

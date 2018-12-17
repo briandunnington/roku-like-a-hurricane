@@ -27,11 +27,11 @@
     <meta property="twitter:image" content="https://metatags.io/assets/meta-tags-16a33a6a8531e519cc0936fbba0ad904e52d35f34a46c97a2c9f6f7dd7d336f2.png"/>
 
     <link rel="canonical" href="https://rokulikeahurricane.io" />
-    <link rel="stylesheet" href="/.css/style.css"/>
-    <link rel="stylesheet" href="/.css/prism.css"/>
-    <link rel="icon" type="image/png" sizes="32x32" href="/.img/favicon-32x32.png"/>
-    <link rel="icon" type="image/png" sizes="16x16" href="/.img/favicon-16x16.png"/>
-    <link rel="apple-touch-icon" sizes="180x180" href="/.img/favicon-32x32.png"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/prism.css"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon-32x32.png"/>
     <link type="application/atom+xml" rel="alternate" href="https://rokulikeahurricane.io/feed.xml" title="Tale" />
 </head>
 
@@ -92,11 +92,11 @@
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Rectangle</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>199<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>199<span class="token punctuation">"</span></span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0xFF0000<span class="token punctuation">"</span></span> <span class="token attr-name">translation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[398,398]<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Rectangle</span><span class="token punctuation">&gt;</span></span></code></pre>
 
-<p><img src="/.img/divisible_by_3_1.png" style="width: 600px;" /></p>
+<p><img src="/img/divisible_by_3_1.png" style="width: 600px;" /></p>
 
 <p>If you look closely, you can see there are some white lines along the right edge of the grid. Zooming in on the image, we can see:</p>
 
-<p><img src="/.img/divisible_by_3_2.png" style="width: 600px;" /></p>
+<p><img src="/img/divisible_by_3_2.png" style="width: 600px;" /></p>
 
 <p>The squares are not lining up correctly since 199 is not divisible by 3. Let's work through what is going on.</p>
 
@@ -125,11 +125,11 @@
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Rectangle</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>201<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>201<span class="token punctuation">"</span></span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0xFF0000<span class="token punctuation">"</span></span> <span class="token attr-name">translation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[402,402]<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Rectangle</span><span class="token punctuation">&gt;</span></span></code></pre>
 
-<p><img src="/.img/divisible_by_3_3.png" style="width: 600px;" /></p>
+<p><img src="/img/divisible_by_3_3.png" style="width: 600px;" /></p>
 
 <p>Here are the two grids side by side for comparison:</p>
 
-<p><img src="/.img/divisible_by_3_4.png" style="width: 600px;" /></p>
+<p><img src="/img/divisible_by_3_4.png" style="width: 600px;" /></p>
 
 <p>Note that this applies to all UI dimensions, not just <code>width</code> and <code>height</code>. An property that specifies a UI dimension is affected, including <code>translation</code> and <code>scale</code>. <code>scale</code> is particularly tricky because the resulting post-scaled dimension must be divisible by 3. So:</p>
 

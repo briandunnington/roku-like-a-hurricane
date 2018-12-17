@@ -31,11 +31,11 @@ However, there is a catch with this approach. Since everything is multiplied by 
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Rectangle</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>199<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>199<span class="token punctuation">"</span></span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0xFF0000<span class="token punctuation">"</span></span> <span class="token attr-name">translation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[398,398]<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Rectangle</span><span class="token punctuation">&gt;</span></span></code></pre>
 
-<img src="/.img/divisible_by_3_1.png" style="width: 600px;" />
+<img src="/img/divisible_by_3_1.png" style="width: 600px;" />
 
 If you look closely, you can see there are some white lines along the right edge of the grid. Zooming in on the image, we can see:
 
-<img src="/.img/divisible_by_3_2.png" style="width: 600px;" />
+<img src="/img/divisible_by_3_2.png" style="width: 600px;" />
 
 The squares are not lining up correctly since 199 is not divisible by 3. Let's work through what is going on.
 
@@ -62,11 +62,11 @@ So if we adjust our dimensions so that each individual square is divisible by 3 
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Rectangle</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>201<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>201<span class="token punctuation">"</span></span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0xFF0000<span class="token punctuation">"</span></span> <span class="token attr-name">translation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[402,402]<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Rectangle</span><span class="token punctuation">&gt;</span></span></code></pre>
 
-<img src="/.img/divisible_by_3_3.png" style="width: 600px;" />
+<img src="/img/divisible_by_3_3.png" style="width: 600px;" />
 
 Here are the two grids side by side for comparison:
 
-<img src="/.img/divisible_by_3_4.png" style="width: 600px;" />
+<img src="/img/divisible_by_3_4.png" style="width: 600px;" />
 
 Note that this applies to all UI dimensions, not just `width` and `height`. An property that specifies a UI dimension is affected, including `translation` and `scale`. `scale` is particularly tricky because the resulting post-scaled dimension must be divisible by 3. So:
 
