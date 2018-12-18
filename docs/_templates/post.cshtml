@@ -70,13 +70,14 @@
 
         <div class="pagination">
             @{
-                var index = @Model.Posts.IndexOf(@Model.CurrentItem);
+                var posts = @Model.Posts.Where((p) => !p.Link.Contains("/categories/")).OrderByDescending(p => p.Date).ToList();
+                var index = posts.IndexOf(@Model.CurrentItem);
                 var nextIndex = index + 1;
-                var count = @Model.Posts.Count;
+                var count = posts.Count;
             }
             @if(nextIndex < count)
             {
-                <a href="@Model.Posts[nextIndex].Link" class="right arrow">&#8594;</a>
+                <a href="@posts[nextIndex].Link" class="right arrow">&#8594;</a>
             }
             <a href="#" class="top">Top</a>
         </div>

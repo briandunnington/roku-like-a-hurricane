@@ -18,7 +18,7 @@ Consider the following component hierarchies:
     Parent > ParentBase > Group
     Child > ChildBase > Group
 
-Let's let the `ParentBase` component define a `Child`` in its `<children>` markup:
+Let's let the `ParentBase` component define a `Child` in its `<children>` markup:
 
 <pre class="  language-markup"><code class="  language-markup"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8" ?&gt;</span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>component</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ParentBase<span class="token punctuation">"</span></span> <span class="token attr-name">extends</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Group<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
@@ -116,6 +116,7 @@ The Roku docs say:
 
 What that means is that the children created in a component are not yet valid targets for focus while `init()` is running. The children are not parented (added to the Scene Graph tree) until after `init()` is complete and calls to `setFocus()` require that the node being focused is in the Scene Graph tree.
 
+(It is usually not a good idea to set the focus during object creation anyway, and a better approach is to set up an observer on `focusedChild` so that your component is aware when something is trying to set focus on it and handle focus at that time.)
 
 
 [RokuInitializationOrder]: https://sdkdocs.roku.com/display/sdkdoc/Component+Initialization+Order

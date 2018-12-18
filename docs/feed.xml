@@ -7,8 +7,8 @@
         <description>rokulikeahurricane.io RSS Feed</description>
         <language>en-us</language>
         <copyright>Copyright 2019 - Brian Dunnington</copyright>
-        <pubDate>Tue, 18 Dec 2018 02:28:26 GMT</pubDate>
-        <lastBuildDate>Tue, 18 Dec 2018 02:28:26 GMT</lastBuildDate>
+        <pubDate>Tue, 18 Dec 2018 03:02:49 GMT</pubDate>
+        <lastBuildDate>Tue, 18 Dec 2018 03:02:49 GMT</lastBuildDate>
 
         <item>
             <title>Component initialization order</title>
@@ -34,7 +34,7 @@
 Child &gt; ChildBase &gt; Group
 </code></pre>
 
-<p>Let's let the <code>ParentBase</code> component define a <code>Child`` in its</code><children>` markup:</p>
+<p>Let's let the <code>ParentBase</code> component define a <code>Child</code> in its <code>&lt;children&gt;</code> markup:</p>
 
 <pre class="  language-markup"><code class="  language-markup"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8" ?&gt;</span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>component</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ParentBase<span class="token punctuation">"</span></span> <span class="token attr-name">extends</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Group<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
@@ -138,6 +138,8 @@ My id is now: parent
 </blockquote>
 
 <p>What that means is that the children created in a component are not yet valid targets for focus while <code>init()</code> is running. The children are not parented (added to the Scene Graph tree) until after <code>init()</code> is complete and calls to <code>setFocus()</code> require that the node being focused is in the Scene Graph tree.</p>
+
+<p>(It is usually not a good idea to set the focus during object creation anyway, and a better approach is to set up an observer on <code>focusedChild</code> so that your component is aware when something is trying to set focus on it and handle focus at that time.)</p>
 
 ]]></description>
             <pubDate>Tue, 18 Dec 2018 12:00:00 GMT</pubDate>
