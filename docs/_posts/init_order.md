@@ -108,13 +108,17 @@ Prints:
     My id is: set_in_init
     My id is now: parent
 
-### Cannot `setFocus()` from `init()`
+### Cannot access `getParent()` from `init()`
 
 The Roku docs say:
 
 > For nodes that are defined in the `<children>` XML markup of the component file, the parent node is set after the node is created, and `init()` is called.
 
-What that means is that the children created in a component are not yet valid targets for focus while `init()` is running. The children are not parented (added to the Scene Graph tree) until after `init()` is complete and calls to `setFocus()` require that the node being focused is in the Scene Graph tree. **However**, experimentation has shown that you can often get away with calling `setFocus()` on a child in the `init()` and I personally have done it often in real apps. I have also seen it not work and struggled to figure out why, so it is probably better to just avoid the ambiguity and not do this.
+Essentially that means that the children are not yet 'parented' when their `init()` function is ran. That means that if you call `getParent()` in `init()`, it will return `invalid`.
+
+### Cannot `setFocus()` from `init()`
+
+Following on the above behavior, that means that the children created in a component are not yet valid targets for focus while `init()` is running. The children are not parented (added to the Scene Graph tree) until after `init()` is complete and calls to `setFocus()` require that the node being focused is in the Scene Graph tree. **However**, experimentation has shown that you can often get away with calling `setFocus()` on a child in the `init()` and I personally have done it often in real apps. I have also seen it not work and struggled to figure out why, so it is probably better to just avoid the ambiguity and not do this.
 
 (It is usually not a good idea to set the focus during object creation anyway, and a better approach is to set up an observer on `focusedChild` so that your component is aware when something is trying to set focus on it and handle focus at that time.)
 
