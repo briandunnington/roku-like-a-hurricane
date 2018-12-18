@@ -7,8 +7,8 @@
         <description>rokulikeahurricane.io RSS Feed</description>
         <language>en-us</language>
         <copyright>Copyright 2019 - Brian Dunnington</copyright>
-        <pubDate>Tue, 18 Dec 2018 07:52:18 GMT</pubDate>
-        <lastBuildDate>Tue, 18 Dec 2018 07:52:18 GMT</lastBuildDate>
+        <pubDate>Tue, 18 Dec 2018 08:40:23 GMT</pubDate>
+        <lastBuildDate>Tue, 18 Dec 2018 08:40:23 GMT</lastBuildDate>
 
         <item>
             <title>Nodes and Associative Array fields</title>
@@ -240,7 +240,7 @@ My id is now: parent
   <p>For nodes that are defined in the <code>&lt;children&gt;</code> XML markup of the component file, the parent node is set after the node is created, and <code>init()</code> is called.</p>
 </blockquote>
 
-<p>What that means is that the children created in a component are not yet valid targets for focus while <code>init()</code> is running. The children are not parented (added to the Scene Graph tree) until after <code>init()</code> is complete and calls to <code>setFocus()</code> require that the node being focused is in the Scene Graph tree.</p>
+<p>What that means is that the children created in a component are not yet valid targets for focus while <code>init()</code> is running. The children are not parented (added to the Scene Graph tree) until after <code>init()</code> is complete and calls to <code>setFocus()</code> require that the node being focused is in the Scene Graph tree. <strong>However</strong>, experimentation has shown that you can often get away with calling <code>setFocus()</code> on a child in the <code>init()</code> and I personally have done it often in real apps. I have also seen it not work and struggled to figure out why, so it is probably better to just avoid the ambiguity and not do this.</p>
 
 <p>(It is usually not a good idea to set the focus during object creation anyway, and a better approach is to set up an observer on <code>focusedChild</code> so that your component is aware when something is trying to set focus on it and handle focus at that time.)</p>
 
