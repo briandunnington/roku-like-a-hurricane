@@ -7,9 +7,142 @@
         <description>rokulikeahurricane.io RSS Feed</description>
         <language>en-us</language>
         <copyright>Copyright 2019 - Brian Dunnington</copyright>
-        <pubDate>Mon, 17 Dec 2018 11:53:59 GMT</pubDate>
-        <lastBuildDate>Mon, 17 Dec 2018 11:53:59 GMT</lastBuildDate>
+        <pubDate>Tue, 18 Dec 2018 02:28:26 GMT</pubDate>
+        <lastBuildDate>Tue, 18 Dec 2018 02:28:26 GMT</lastBuildDate>
 
+        <item>
+            <title>Component initialization order</title>
+            <link>http://192.168.1.139:52757/init_order.html</link>
+            <description><![CDATA[
+<p>Roku's documenation contains <a href="https://sdkdocs.roku.com/display/sdkdoc/Component+Initialization+Order">a good article</a> about component initialization order. Specifically, it states:</p>
+
+<blockquote>
+  <p>Instances of components defined in an XML file follow a well-defined initialization order when they are created.</p>
+  
+  <ul>
+  <li>The <code>&lt;children&gt;</code> element nodes defined in XML markup are created, and their fields are set to their initial values, either to a default value, or to the value specified in the XML markup.</li>
+  <li>The <code>&lt;interface&gt;</code> element fields of the XML component are created, and their initial values are set, either to a default value, or to the value specified by the value attribute.</li>
+  <li>The <code>&lt;script&gt;</code> element <code>init()</code> function is called, and all initializations contained in the function are performed.</li>
+  </ul>
+</blockquote>
+
+<p>While that is very helpful, it leaves out some subtle bits and sometimes it can be hard to visualize, so let's do some experiments to better illustrate the order.</p>
+
+<p>Consider the following component hierarchies:</p>
+
+<pre><code>Parent &gt; ParentBase &gt; Group
+Child &gt; ChildBase &gt; Group
+</code></pre>
+
+<p>Let's let the <code>ParentBase</code> component define a <code>Child`` in its</code><children>` markup:</p>
+
+<pre class="  language-markup"><code class="  language-markup"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8" ?&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>component</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ParentBase<span class="token punctuation">"</span></span> <span class="token attr-name">extends</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Group<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/brightscript<span class="token punctuation">"</span></span> <span class="token attr-name">uri</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>pkg:/components/ParentBase.brs<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>children</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Child</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>childInParentBase<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>children</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>component</span><span class="token punctuation">&gt;</span></span></code></pre>
+
+<p>And, let's imagine that the <code>Parent</code> component defines a <code>Child</code> component as part of its <code>&lt;children&gt;</code>:</p>
+
+<pre class="  language-markup"><code class="  language-markup"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8" ?&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>component</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Parent<span class="token punctuation">"</span></span> <span class="token attr-name">extends</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ParentBase<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/brightscript<span class="token punctuation">"</span></span> <span class="token attr-name">uri</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>pkg:/components/Parent.brs<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>children</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Child</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>childFromParent<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>children</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>component</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+
+<p>Now consider another component that uses the <code>Parent</code> component and defines some additional children:</p>
+
+<pre class="  language-markup"><code class="  language-markup"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8" ?&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>component</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>OtherComponent<span class="token punctuation">"</span></span> <span class="token attr-name">extends</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Group<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/brightscript<span class="token punctuation">"</span></span> <span class="token attr-name">uri</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>pkg:/components/OtherComponent.brs<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>children</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Parent</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>parent<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Child</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>firstchild<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Child</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>secondchild<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Parent</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>children</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>component</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+
+<p>If you run this code, you will see that the order of the <code>init</code> calls is actually:</p>
+
+<pre><code>ChildBase for childInParentBase
+Child for childInParentBase
+ParentBase for parent
+ChildBase for childFromParent
+ChildBase for childFromParent
+Parent for parent
+ChildBase for firstChild
+Child for firstChild
+ChildBase for secondChild
+Child for secondChild
+</code></pre>
+
+<p>So if we wanted to write a more complete order of initialization, it might look like this:</p>
+
+<ol>
+<li>If the component extends another component, the base component (including all children) will be initialized first</li>
+<li>Initialize nodes defined in <code>&lt;children&gt;</code></li>
+<li>Call component's <code>init()</code> method</li>
+<li>Field values are available for reading</li>
+<li>Children added via markup are initialized</li>
+</ol>
+
+<p>Understanding the order is helpful, but understanding the implications is also very important. Consider these perhaps subtle implications:</p>
+
+<h3>Non-default field values are not available in <code>init()</code></h3>
+
+<p>Consider this <code>init()</code> code:</p>
+
+<pre class="  language-vbnet"><code class="  language-vbnet"><span class="token keyword">sub</span> init<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    ?<span class="token string">"My id is: "</span> <span class="token operator">+</span> m.top.id
+<span class="token keyword">end</span> <span class="token keyword">sub</span></code></pre>
+
+<p>Assuming the <code>id</code> property was set in markup, you might be surprised to see the output of this is:</p>
+
+<pre><code>My id is:
+</code></pre>
+
+<p>At the time that <code>init()</code> is called, any non-defaulf field values are not yet set, so <code>m.top.id</code> has no value.</p>
+
+<p>Similarly, any values you set on <code>m.top</code> in <code>init()</code> could be overwritten when initialization is complete:</p>
+
+<pre class="  language-vbnet"><code class="  language-vbnet"><span class="token keyword">sub</span> init<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    m.top.id <span class="token operator">=</span> <span class="token string">"set_in_init"</span>
+    ?<span class="token string">"My id is: "</span> <span class="token operator">+</span> m.top.id
+<span class="token keyword">end</span> <span class="token keyword">sub</span>
+
+<span class="token keyword">function</span> onKeyEvent<span class="token punctuation">(</span>key<span class="token punctuation">,</span> press<span class="token punctuation">)</span>
+    ?<span class="token string">"My id is now: "</span> <span class="token operator">+</span> m.top.id
+    <span class="token keyword">return</span> <span class="token keyword">true</span>
+<span class="token keyword">end</span> <span class="token keyword">function</span>
+</code></pre>
+
+<p>Prints:</p>
+
+<pre><code>My id is: set_in_init
+My id is now: parent
+</code></pre>
+
+<h3>Cannot <code>setFocus()</code> from <code>init()</code></h3>
+
+<p>The Roku docs say:</p>
+
+<blockquote>
+  <p>For nodes that are defined in the <code>&lt;children&gt;</code> XML markup of the component file, the parent node is set after the node is created, and <code>init()</code> is called.</p>
+</blockquote>
+
+<p>What that means is that the children created in a component are not yet valid targets for focus while <code>init()</code> is running. The children are not parented (added to the Scene Graph tree) until after <code>init()</code> is complete and calls to <code>setFocus()</code> require that the node being focused is in the Scene Graph tree.</p>
+
+]]></description>
+            <pubDate>Tue, 18 Dec 2018 12:00:00 GMT</pubDate>
+            <guid>http://192.168.1.139:52757/init_order.html</guid>
+        </item>
         <item>
             <title>A Different Kind of &#39;Rule of Thirds&#39;</title>
             <link>http://192.168.1.139:52757/divisible_by_3.html</link>
