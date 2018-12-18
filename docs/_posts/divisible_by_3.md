@@ -68,7 +68,7 @@ Here are the two grids side by side for comparison:
 
 <img src="/img/divisible_by_3_4.png" style="width: 600px;" />
 
-Note that this applies to all UI dimensions, not just `width` and `height`. An property that specifies a UI dimension is affected, including `translation` and `scale`. `scale` is particularly tricky because the resulting post-scaled dimension must be divisible by 3. So:
+Note that this applies to all UI dimensions, not just `width` and `height`. Any property that specifies a UI dimension is affected, including `translation` and `scale`. `scale` is particularly tricky because the resulting post-scaled dimension must be divisible by 3. So:
 
 * 600 ✔️ with `scale` of `0.8` = 480 ✔️ * 2/3 = 320 ✔️
 * 597 ✔️ with `scale` of `0.8` = 477.6 ❌

@@ -77,18 +77,17 @@ pre, code {
 }
 
 pre {
-    font-size: 1.0rem;
-    line-height: 110%;
-    background: #011627;
-    color: #ffffff;
-    padding: 0.8em;
+	font-size: 1.0rem;
+	line-height: 110%;
+	background: #f9f9f9;
+    color: #bf616a;
+    padding: .25em .5em;
 }
 
 code {
     background-color: #f9f9f9;
     color: #bf616a;
     border-radius: 3px;
-    font-size: 85%;
     padding: .25em .5em;
     line-height: 0;
 }
@@ -98,10 +97,7 @@ pre {
 }
 
 pre code {
-    background-color: transparent;
-    color: inherit;
-    font-size: 100%;
-    padding: 0
+    padding: 0;
 }
 
 .highlight {
