@@ -8,7 +8,15 @@ and community around it than other platforms. But there are lots of tips and tri
 discovered/developed that can save lots of headaches and maybe even make Roku development a little fun. This blog
 hopes to collect and document those nuggets of wisdom and contribute to our overall collective knowledge.
 
-# About Me
+### Roku Developer Documentation: [https://sdkdocs.roku.com][Docs]
+
+### Roku Developers Slack: [https://rokudevelopers.slack.com][Slack]
+
+### Roku Developer Forums: [https://forums.roku.com/][Forums]
+
+---
+
+## About Me
 
 I have developed Roku apps for some of the biggest names on the platform, including HBO, Hulu, TBS/TNT, Dolby, iHeartRadio,
 and many more. Through trial-and-error, experimentation, research, and collaboration, I have built up a library of tools
@@ -28,6 +36,9 @@ Roku-related projects at:
 ### Roku Fetch: [https://github.com/briandunnington/roku-fetch][Fetch]
 
 
+[Docs]: https://sdkdocs.roku.com
+[Slack]: https://rokudevelopers.slack.com
+[Forums]: https://forums.roku.com/
 [Twitter]: https://twitter.com/briandunnington
 [Github]: https://github.com/briandunnington
 [Redoku]: https://github.com/briandunnington/redoku
