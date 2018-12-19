@@ -72,8 +72,13 @@
             @{
                 var posts = @Model.Posts.Where((p) => !p.Link.Contains("/categories/")).OrderByDescending(p => p.Date).ToList();
                 var index = posts.IndexOf(@Model.CurrentItem);
+                var prevIndex = index - 1;
                 var nextIndex = index + 1;
                 var count = posts.Count;
+            }
+            @if(prevIndex >= 0)
+            {
+                <a href="@posts[prevIndex].Link" class="left arrow">&#8592;</a>
             }
             @if(nextIndex < count)
             {
