@@ -2,18 +2,18 @@
 ---------------------------------------
 
                 @{
-                    var categories = @Model.Pages.Where((p) => p.Link.Contains("/category/")).OrderByDescending((p) => p.OriginalFileName);
+                    var categories = @Model.Pages.Where((p) => p.LinkNoExt.Contains("/category/")).OrderByDescending((p) => p.OriginalFileName);
                 }
                 @foreach (var category in categories)
                 {
                     {
                         if (category.Contains("Thumbnail"))
                         {
-                            <p><a href="@category.Link" class="thumbnail"><img src="@category.Thumbnail" /></a></p>
+                            <p><a href="@category.LinkNoExt" class="thumbnail"><img src="@category.Thumbnail" /></a></p>
                         }
                     }
                     <h4 class="pageTitle">@category.OriginalFileName</h4>
-                    <p><a class="btn btn-default" href="@category.Link">Read more &raquo;</a></p>
+                    <p><a class="btn btn-default" href="@category.LinkNoExt">Read more &raquo;</a></p>
                     <hr />
                 }
 
@@ -50,10 +50,10 @@ ENUMERATE TAGS:
                     {
                         if (post.Contains("Thumbnail"))
                         {
-                            <p><a href="@post.Link" class="thumbnail"><img src="@post.Thumbnail" /></a></p>
+                            <p><a href="@post.LinkNoExt" class="thumbnail"><img src="@post.Thumbnail" /></a></p>
                         }
                         <h4 class="pageTitle">@post.Title</h4>
-                        <p><a class="btn btn-default" href="@post.Link">Read more &raquo;</a></p>
+                        <p><a class="btn btn-default" href="@post.LinkNoExt">Read more &raquo;</a></p>
                         <hr />
                     }
                 }

@@ -41,16 +41,16 @@
                 <h2 class="nav-title">Roku Like A Hurricane</h2>
             </a>
             <ul>
-                <li><a href="/about.html">About</a></li>
+                <li><a href="/about">About</a></li>
             </ul>
         </div>
     </nav>
 
     <main>
         <div class="catalogue">
-            @foreach (var post in @Model.Posts.Where((p) => !p.Link.Contains("/categories/")).OrderByDescending(p => p.Date))
+            @foreach (var post in @Model.Posts.Where((p) => !p.LinkNoExt.Contains("/categories/")).OrderByDescending(p => p.Date))
             {
-                <a href="@post.Link" class="catalogue-item">
+                <a href="@post.LinkNoExt" class="catalogue-item">
                     <div>
                         <time datetime="@post.Date.ToString("yyyy-MM-dd hh:mm:ss +0000")" class="catalogue-time">@post.Date.ToString("MMMM d, yyyy")</time>
                         <h1 class="catalogue-title">@post.Title</h1>

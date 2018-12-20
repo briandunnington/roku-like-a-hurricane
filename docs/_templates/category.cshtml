@@ -41,7 +41,7 @@
                 <h2 class="nav-title">Roku Like A Hurricane</h2>
             </a>
             <ul>
-                <li><a href="/about.html">About</a></li>
+                <li><a href="/about">About</a></li>
             </ul>
         </div>
     </nav>
@@ -68,7 +68,7 @@
                 <h1>Category: @item.Key</h1>
                 foreach (var post in item.Value)
                 {
-                <a href="@post.Link" class="catalogue-item">
+                <a href="@post.LinkNoExt" class="catalogue-item">
                     <div>
                         <time datetime="@post.Date.ToString("yyyy-MM-dd hh:mm:ss +0000")" class="catalogue-time">@post.Date.ToString("MMMM d, yyyy")</time>
                         <h1 class="catalogue-title">@post.Title</h1>

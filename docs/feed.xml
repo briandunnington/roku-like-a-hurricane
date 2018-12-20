@@ -7,12 +7,12 @@
         <description>rokulikeahurricane.io RSS Feed</description>
         <language>en-us</language>
         <copyright>Copyright 2019 - Brian Dunnington</copyright>
-        <pubDate>Wed, 19 Dec 2018 01:44:25 GMT</pubDate>
-        <lastBuildDate>Wed, 19 Dec 2018 01:44:25 GMT</lastBuildDate>
+        <pubDate>Thu, 20 Dec 2018 08:08:07 GMT</pubDate>
+        <lastBuildDate>Thu, 20 Dec 2018 08:08:07 GMT</lastBuildDate>
 
         <item>
             <title>Fix for live video delay</title>
-            <link>http://192.168.1.139:52757/live_video_delay.html</link>
+            <link>http://192.168.1.139:52757/live_video_delay</link>
             <description><![CDATA[
 <p>The first time you implement live video playback in your Roku app and then go to try it out, you invariably find that the video is starting from some other point than the current live position. This one trips a lot of folks up (see <a href="https://forums.roku.com/viewtopic.php?t=39589">here</a>, <a href="https://forums.roku.com/viewtopic.php?t=66558">here</a>, <a href="https://forums.roku.com/viewtopic.php?t=37622">here</a>, and <a href="https://stackoverflow.com/questions/50021092/roku-is-playing-about-a-1-hour-delay-on-the-live-stream">here</a>), but luckily it has an easy solution.</p>
 
@@ -29,11 +29,11 @@
 
 ]]></description>
             <pubDate>Thu, 20 Dec 2018 12:00:00 GMT</pubDate>
-            <guid>http://192.168.1.139:52757/live_video_delay.html</guid>
+            <guid>http://192.168.1.139:52757/live_video_delay</guid>
         </item>
         <item>
             <title>Nodes and Associative Array fields</title>
-            <link>http://192.168.1.139:52757/node_aa.html</link>
+            <link>http://192.168.1.139:52757/node_aa</link>
             <description><![CDATA[
 <p>Like a lot of other languages, BrightScript passes 'intrinsic' types by value and 'object' types by reference. In fact, <a href="https://sdkdocs.roku.com/display/sdkdoc/Component+Architecture#ComponentArchitecture-Intrinsictypesandobjecttypes">their documentation</a> shows an example of how this works:</p>
 
@@ -132,11 +132,11 @@ m.props = props
 
 ]]></description>
             <pubDate>Wed, 19 Dec 2018 12:00:00 GMT</pubDate>
-            <guid>http://192.168.1.139:52757/node_aa.html</guid>
+            <guid>http://192.168.1.139:52757/node_aa</guid>
         </item>
         <item>
             <title>Component initialization order</title>
-            <link>http://192.168.1.139:52757/init_order.html</link>
+            <link>http://192.168.1.139:52757/init_order</link>
             <description><![CDATA[
 <p>Roku's documenation contains <a href="https://sdkdocs.roku.com/display/sdkdoc/Component+Initialization+Order">a good article</a> about component initialization order. Specifically, it states:</p>
 
@@ -271,11 +271,11 @@ My id is now: parent
 
 ]]></description>
             <pubDate>Tue, 18 Dec 2018 12:00:00 GMT</pubDate>
-            <guid>http://192.168.1.139:52757/init_order.html</guid>
+            <guid>http://192.168.1.139:52757/init_order</guid>
         </item>
         <item>
             <title>A Different Kind of &#39;Rule of Thirds&#39;</title>
-            <link>http://192.168.1.139:52757/divisible_by_3.html</link>
+            <link>http://192.168.1.139:52757/divisible_by_3</link>
             <description><![CDATA[
 <p>Roku devices <a href="https://sdkdocs.roku.com/display/sdkdoc/Specifying+Display+Resolution">support a few different resolutions</a> for displaying your app's UI:</p>
 
@@ -355,11 +355,11 @@ My id is now: parent
 
 ]]></description>
             <pubDate>Mon, 17 Dec 2018 12:00:00 GMT</pubDate>
-            <guid>http://192.168.1.139:52757/divisible_by_3.html</guid>
+            <guid>http://192.168.1.139:52757/divisible_by_3</guid>
         </item>
         <item>
             <title>Poster component property order</title>
-            <link>http://192.168.1.139:52757/poster_property_order.html</link>
+            <link>http://192.168.1.139:52757/poster_property_order</link>
             <description><![CDATA[
 <p>Often when loading images from the web, we do not have control over how large the source images are. Loading images
 that are too large will eat up precious Roku memory and cause performance problems in your app.</p>
@@ -404,47 +404,47 @@ change our markup to ensure that the <code>uri</code> is set <em>after</em> the 
 
 ]]></description>
             <pubDate>Mon, 17 Dec 2018 12:00:00 GMT</pubDate>
-            <guid>http://192.168.1.139:52757/poster_property_order.html</guid>
+            <guid>http://192.168.1.139:52757/poster_property_order</guid>
         </item>
         <item>
             <title>Patterns</title>
-            <link>http://192.168.1.139:52757/categories/patterns.html</link>
+            <link>http://192.168.1.139:52757/categories/patterns</link>
             <description><![CDATA[
 <p>[this page will list all in the category]</p>
 
 ]]></description>
             <pubDate>Mon, 17 Dec 2018 12:00:00 GMT</pubDate>
-            <guid>http://192.168.1.139:52757/categories/patterns.html</guid>
+            <guid>http://192.168.1.139:52757/categories/patterns</guid>
         </item>
         <item>
             <title>Performance</title>
-            <link>http://192.168.1.139:52757/categories/performance.html</link>
+            <link>http://192.168.1.139:52757/categories/performance</link>
             <description><![CDATA[
 <p>[this page will list all in the category]</p>
 
 ]]></description>
             <pubDate>Mon, 17 Dec 2018 12:00:00 GMT</pubDate>
-            <guid>http://192.168.1.139:52757/categories/performance.html</guid>
+            <guid>http://192.168.1.139:52757/categories/performance</guid>
         </item>
         <item>
             <title>Tips</title>
-            <link>http://192.168.1.139:52757/categories/tips.html</link>
+            <link>http://192.168.1.139:52757/categories/tips</link>
             <description><![CDATA[
 <p>[this page will list all in the category]</p>
 
 ]]></description>
             <pubDate>Mon, 17 Dec 2018 12:00:00 GMT</pubDate>
-            <guid>http://192.168.1.139:52757/categories/tips.html</guid>
+            <guid>http://192.168.1.139:52757/categories/tips</guid>
         </item>
         <item>
             <title>Tools</title>
-            <link>http://192.168.1.139:52757/categories/tools.html</link>
+            <link>http://192.168.1.139:52757/categories/tools</link>
             <description><![CDATA[
 <p>[this page will list all in the category]</p>
 
 ]]></description>
             <pubDate>Mon, 17 Dec 2018 12:00:00 GMT</pubDate>
-            <guid>http://192.168.1.139:52757/categories/tools.html</guid>
+            <guid>http://192.168.1.139:52757/categories/tools</guid>
         </item>
     </channel>
 </rss>

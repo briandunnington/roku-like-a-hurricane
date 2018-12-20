@@ -18,7 +18,7 @@
 
         @foreach (var post in @Model.Posts.OrderByDescending((p) => p.Date))
         {
-        var link = siteRoot + post.Link;
+        var link = siteRoot + post.LinkNoExt;
         var mainimagehtml = "";
         if(post.Contains("MainImage")) {
             var mainimagesrc = siteRoot + post.MainImage;

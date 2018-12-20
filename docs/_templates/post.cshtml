@@ -43,7 +43,7 @@
                 <h2 class="nav-title">Roku Like A Hurricane</h2>
             </a>
             <ul>
-                <li><a href="/about.html">About</a></li>
+                <li><a href="/about">About</a></li>
             </ul>
         </div>
     </nav>
@@ -61,7 +61,7 @@
             <div class="post-line"></div>
 
             @{
-                var categoryLink = "categories/" + @Model.CurrentItem.Category.ToLower() + ".html";
+                var categoryLink = "categories/" + @Model.CurrentItem.Category.ToLower();
             }
             <h4>Category: <a href="@categoryLink">@Model.CurrentItem.Category</a></h4>
 
@@ -70,7 +70,7 @@
 
         <div class="pagination">
             @{
-                var posts = @Model.Posts.Where((p) => !p.Link.Contains("/categories/")).OrderByDescending(p => p.Date).ToList();
+                var posts = @Model.Posts.Where((p) => !p.LinkNoExt.Contains("/categories/")).OrderByDescending(p => p.Date).ToList();
                 var index = posts.IndexOf(@Model.CurrentItem);
                 var prevIndex = index - 1;
                 var nextIndex = index + 1;
@@ -78,11 +78,11 @@
             }
             @if(prevIndex >= 0)
             {
-                <a href="@posts[prevIndex].Link" class="left arrow">&#8592;</a>
+                <a href="@posts[prevIndex].LinkNoExt" class="left arrow">&#8592;</a>
             }
             @if(nextIndex < count)
             {
-                <a href="@posts[nextIndex].Link" class="right arrow">&#8594;</a>
+                <a href="@posts[nextIndex].LinkNoExt" class="right arrow">&#8594;</a>
             }
             <a href="#" class="top">Top</a>
         </div>
