@@ -33,6 +33,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png"/>
     <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon-32x32.png"/>
     <link type="application/atom+xml" rel="alternate" href="https://rokulikeahurricane.io/feed.xml" title="Tale" />
+
+    <script src="/js/prism.js"></script>
 </head>
 
 <body>
@@ -62,7 +64,7 @@
 
             <h4>Category: <a href="categories/patterns">Patterns</a></h4>
 
-            <div><p>Roku's documenation contains <a href="https://sdkdocs.roku.com/display/sdkdoc/Component+Initialization+Order">a good article</a> about component initialization order. Specifically, it states:</p>
+            <div class="language-vbnet"><p>Roku's documenation contains <a href="https://sdkdocs.roku.com/display/sdkdoc/Component+Initialization+Order">a good article</a> about component initialization order. Specifically, it states:</p>
 
 <blockquote>
   <p>Instances of components defined in an XML file follow a well-defined initialization order when they are created.</p>
@@ -84,37 +86,38 @@ Child &gt; ChildBase &gt; Group
 
 <p>Let's let the <code>ParentBase</code> component define a <code>Child</code> in its <code>&lt;children&gt;</code> markup:</p>
 
-<pre class="  language-markup"><code class="  language-markup"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8" ?&gt;</span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>component</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ParentBase<span class="token punctuation">"</span></span> <span class="token attr-name">extends</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Group<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/brightscript<span class="token punctuation">"</span></span> <span class="token attr-name">uri</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>pkg:/components/ParentBase.brs<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>children</span><span class="token punctuation">&gt;</span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Child</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>childInParentBase<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>children</span><span class="token punctuation">&gt;</span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>component</span><span class="token punctuation">&gt;</span></span></code></pre>
+<pre  class="language-markup" ><code>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;component name="ParentBase" extends="Group"&gt;
+    &lt;script type="text/brightscript" uri="pkg:/components/ParentBase.brs"/&gt;
+    &lt;children&gt;
+        &lt;Child id="childInParentBase"/&gt;
+    &lt;/children&gt;
+&lt;/component&gt;
+</code></pre>
 
 <p>And, let's imagine that the <code>Parent</code> component defines a <code>Child</code> component as part of its <code>&lt;children&gt;</code>:</p>
 
-<pre class="  language-markup"><code class="  language-markup"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8" ?&gt;</span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>component</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Parent<span class="token punctuation">"</span></span> <span class="token attr-name">extends</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ParentBase<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/brightscript<span class="token punctuation">"</span></span> <span class="token attr-name">uri</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>pkg:/components/Parent.brs<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>children</span><span class="token punctuation">&gt;</span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Child</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>childFromParent<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>children</span><span class="token punctuation">&gt;</span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>component</span><span class="token punctuation">&gt;</span></span>
+<pre  class="language-markup" ><code>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;component name="Parent" extends="ParentBase"&gt;
+    &lt;script type="text/brightscript" uri="pkg:/components/Parent.brs"/&gt;
+    &lt;children&gt;
+        &lt;Child id="childFromParent"/&gt;
+    &lt;/children&gt;
+&lt;/component&gt;
 </code></pre>
 
 <p>Now consider another component that uses the <code>Parent</code> component and defines some additional children:</p>
 
-<pre class="  language-markup"><code class="  language-markup"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8" ?&gt;</span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>component</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>OtherComponent<span class="token punctuation">"</span></span> <span class="token attr-name">extends</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Group<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/brightscript<span class="token punctuation">"</span></span> <span class="token attr-name">uri</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>pkg:/components/OtherComponent.brs<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>children</span><span class="token punctuation">&gt;</span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Parent</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>parent<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Child</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>firstchild<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Child</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>secondchild<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Parent</span><span class="token punctuation">&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>children</span><span class="token punctuation">&gt;</span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>component</span><span class="token punctuation">&gt;</span></span>
+<pre  class="language-markup" ><code>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;component name="OtherComponent" extends="Group"&gt;
+    &lt;script type="text/brightscript" uri="pkg:/components/OtherComponent.brs"/&gt;
+    &lt;children&gt;
+        &lt;Parent id="parent"&gt;
+            &lt;Child id="firstchild"/&gt;
+            &lt;Child id="secondchild"/&gt;
+        &lt;/Parent&gt;
+    &lt;/children&gt;
+&lt;/component&gt;
 </code></pre>
 
 <p>If you run this code, you will see that the order of the <code>init</code> calls is actually:</p>
@@ -147,9 +150,10 @@ Child for secondChild
 
 <p>Consider this <code>init()</code> code:</p>
 
-<pre class="  language-vbnet"><code class="  language-vbnet"><span class="token keyword">sub</span> init<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    ?<span class="token string">"My id is: "</span> <span class="token operator">+</span> m.top.id
-<span class="token keyword">end</span> <span class="token keyword">sub</span></code></pre>
+<pre><code>sub init()
+    ?"My id is: " + m.top.id
+end sub
+</code></pre>
 
 <p>Assuming the <code>id</code> property was set in markup, you might be surprised to see the output of this is:</p>
 
@@ -160,15 +164,15 @@ Child for secondChild
 
 <p>Similarly, any values you set on <code>m.top</code> in <code>init()</code> could be overwritten when initialization is complete:</p>
 
-<pre class="  language-vbnet"><code class="  language-vbnet"><span class="token keyword">sub</span> init<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    m.top.id <span class="token operator">=</span> <span class="token string">"set_in_init"</span>
-    ?<span class="token string">"My id is: "</span> <span class="token operator">+</span> m.top.id
-<span class="token keyword">end</span> <span class="token keyword">sub</span>
+<pre><code>sub init()
+    m.top.id = "set_in_init"
+    ?"My id is: " + m.top.id
+end sub
 
-<span class="token keyword">function</span> onKeyEvent<span class="token punctuation">(</span>key<span class="token punctuation">,</span> press<span class="token punctuation">)</span>
-    ?<span class="token string">"My id is now: "</span> <span class="token operator">+</span> m.top.id
-    <span class="token keyword">return</span> <span class="token keyword">true</span>
-<span class="token keyword">end</span> <span class="token keyword">function</span>
+function onKeyEvent(key, press)
+    ?"My id is now: " + m.top.id
+    return true
+end function
 </code></pre>
 
 <p>Prints:</p>

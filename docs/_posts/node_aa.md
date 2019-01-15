@@ -5,35 +5,36 @@ Category: Performance
 
 Like a lot of other languages, BrightScript passes 'intrinsic' types by value and 'object' types by reference. In fact, [their documentation][ByRefDoc] shows an example of how this works:
 
-<pre class="  language-vbnet"><code class="  language-vbnet"><span class="token keyword">function</span> Modify<span class="token punctuation">(</span>a <span class="token keyword">as</span> <span class="token keyword">Integer</span><span class="token punctuation">,</span> b <span class="token keyword">as</span> <span class="token keyword">Object</span><span class="token punctuation">)</span> <span class="token keyword">as</span> Void
-    a <span class="token operator">=</span> <span class="token number">43</span>
-    b.first <span class="token operator">=</span> <span class="token number">6</span>
-<span class="token keyword">end</span> <span class="token keyword">function</span>
-<span class="token comment">'.....</span>
-x <span class="token operator">=</span> <span class="token number">42</span>
-y <span class="token operator">=</span> { first<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> second<span class="token punctuation">:</span> <span class="token number">2</span> }
-Modify<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span>
-<span class="token comment">' now x is still 42 but y.first is 6</span></code></pre>
+    function Modify(a as Integer, b as Object) as Void
+        a = 43
+        b.first = 6
+    end function
+    '.....
+    x = 42
+    y = { first: 1, second: 2 }
+    Modify(x, y)
+    ' now x is still 42 but y.first is 6
 
 As you can see, `y` was an associative array that got passed to the `Modify()` function. The `Modify()` function changed one of the properties on the `y` object, and since it was passed by ref, the original `y` object was updated.
 
 But did you know that this is only true some of the time? Consider a simple component like this:
 
-<pre class="  language-markup"><code class=" language-markup"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8" ?&gt;</span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>component</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>MyComponent<span class="token punctuation">"</span></span> <span class="token attr-name">extends</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Group<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/brightscript<span class="token punctuation">"</span></span> <span class="token attr-name">uri</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>pkg:/components/MyComponent.brs<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>interface</span><span class="token punctuation">&gt;</span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>field</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>props<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>assocarray<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>interface</span><span class="token punctuation">&gt;</span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>component</span><span class="token punctuation">&gt;</span></span></code></pre>
+    ::: class="language-markup" :::
+    <?xml version="1.0" encoding="utf-8" ?>
+    <component name="MyComponent" extends="Group">
+        <script type="text/brightscript" uri="pkg:/components/MyComponent.brs"/>
+        <interface>
+            <field id="props" type="assocarray"/>
+        </interface>
+    </component>
 
 This component defines a single additional field called `props` that is of type `assocarray`. We use this component like this:
 
-<pre class="  language-vbnet"><code class="  language-vbnet">    my <span class="token operator">=</span> m.top.findNode<span class="token punctuation">(</span><span class="token string">"my"</span><span class="token punctuation">)</span>
-    my.props <span class="token operator">=</span> {
-        text<span class="token punctuation">:</span> <span class="token string">"initial text"</span>
-        count<span class="token punctuation">:</span> <span class="token number">1</span>
-    }</code></pre>
+    my = m.top.findNode("my")
+    my.props = {
+        text: "initial text"
+        count: 1
+    }
 
 And when we inspect the value, it is what we would expect:
 
@@ -67,13 +68,13 @@ Here we get a copy of the AA, update it, and then set the node's field to the ne
 
 There is one other caveat to this copying behavior. Consider a normal AA like this:
 
-<pre class="  language-vbnet"><code class="  language-vbnet">    props <span class="token operator">=</span> {
-        text<span class="token punctuation">:</span> <span class="token string">"initial text"</span>
-        count<span class="token punctuation">:</span> <span class="token number">1</span>
-        func<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-            <span class="token keyword">return</span> <span class="token string">"func called"</span>
-        <span class="token keyword">end</span> <span class="token keyword">function</span>
-    }</code></pre>
+    props = {
+        text: "initial text"
+        count: 1
+        func: function()
+            return "func called"
+        end function
+    }
 
 This AA defines `func` as a function, and when we call it, we get the expected results:
 
@@ -81,15 +82,15 @@ This AA defines `func` as a function, and when we call it, we get the expected r
 
 But if we set this AA as a node field and call it:
 
-<pre class="  language-vbnet"><code class="  language-vbnet">    props <span class="token operator">=</span> {
-        text<span class="token punctuation">:</span> <span class="token string">"initial text"</span>
-        count<span class="token punctuation">:</span> <span class="token number">1</span>
-        func<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-            <span class="token keyword">return</span> <span class="token string">"func called"</span>
-        <span class="token keyword">end</span> <span class="token keyword">function</span>
+    props = {
+        text: "initial text"
+        count: 1
+        func: function()
+            return "func called"
+        end function
     }
-    my <span class="token operator">=</span> m.top.findNode<span class="token punctuation">(</span><span class="token string">"my"</span><span class="token punctuation">)</span>
-    my.props <span class="token operator">=</span> props</code></pre>
+    my = m.top.findNode("my")
+    my.props = props
 
 <img src="/img/node_aa_5.png" />
 

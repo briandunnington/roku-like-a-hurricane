@@ -7,14 +7,14 @@ The first time you implement live video playback in your Roku app and then go to
 
 The trick is to set the `PlayStart` field of the `ContentNode` that you pass to `video.content`. [Roku's docs][PlayStart] say that "PlayStart defines the start position of the content, in seconds." Ok - but what is the start position of a live stream? There are ways to actually calculate it, but most folks find that it is easier to simply set it to "a sufficiently large number". What constitutes a sufficiently large number? Many folks use 99999 or something like that, but since `PlayStart` is an `int`, the largest possibly value it can take it is 2147483647, so that is what I use - just to be safe 😎
 
-<pre class="  language-vbnet"><code class="  language-vbnet">    content <span class="token operator">=</span> CreateObject<span class="token punctuation">(</span><span class="token string">"roSGNode"</span><span class="token punctuation">,</span> <span class="token string">"ContentNode"</span><span class="token punctuation">)</span>
-    content.setFields<span class="token punctuation">(</span>{
-        streamformat<span class="token punctuation">:</span> <span class="token string">"hls"</span>
-        url<span class="token punctuation">:</span> <span class="token string">"http://your.video.url"</span>
-        live<span class="token punctuation">:</span> <span class="token keyword">true</span>
-        playstart<span class="token punctuation">:</span> <span class="token number">2147483647</span>
-    }<span class="token punctuation">)</span>
-    video.content <span class="token operator">=</span> content</code></pre>
+    content = CreateObject("roSGNode", "ContentNode")
+    content.setFields({
+        streamformat: "hls"
+        url: "http://your.video.url"
+        live: true
+        playstart: 2147483647
+    })
+    video.content = content
 
 [Example1]: https://forums.roku.com/viewtopic.php?t=39589
 [Example2]: https://forums.roku.com/viewtopic.php?t=66558

@@ -17,7 +17,8 @@ properties to control how the image is loaded into memory:
 By using these properties, you can load an image that is normally too large but only consume the memory required for the
 desired final size. For example:
 
-<pre class="  language-markup"><code class="  language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Poster</span> <span class="token attr-name">uri</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://big.image<span class="token punctuation">"</span></span> <span class="token attr-name">loadDisplayMode</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>scaleToZoom<span class="token punctuation">"</span></span> <span class="token attr-name">loadWidth</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>720<span class="token punctuation">"</span></span> <span class="token attr-name">loadHeight</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>405<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span></code></pre>
+    ::: class="language-markup" :::
+    <Poster uri="http://big.image" loadDisplayMode="scaleToZoom" loadWidth="720" loadHeight="405" />
 
 If you view the [texture memory][TextureMemory], you can see:
 
@@ -32,7 +33,8 @@ What that means is that **property source order is important**. As soon as the `
 with whatever options have been set. If the `load*` properties have not been set yet, they will be ignored. So we need to
 change our markup to ensure that the `uri` is set *after* the other properties:
 
-<pre class="  language-markup"><code class="  language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Poster</span> <span class="token attr-name">loadDisplayMode</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>scaleToZoom<span class="token punctuation">"</span></span> <span class="token attr-name">loadWidth</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>720<span class="token punctuation">"</span></span> <span class="token attr-name">loadHeight</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>405<span class="token punctuation">"</span></span> <span class="token attr-name">uri</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://big.image<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span></code></pre>
+    ::: class="language-markup" :::
+    <Poster loadDisplayMode="scaleToZoom" loadWidth="720" loadHeight="405" uri="http://big.image" />
 
 Now when you view the texture memory, you see:
 
