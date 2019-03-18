@@ -66,7 +66,7 @@
             @foreach (var item in catlist)
             {
                 <h1>Category: @item.Key</h1>
-                foreach (var post in item.Value)
+                foreach (var post in item.Value.OrderByDescending(p => p.Date))
                 {
                 <a href="@post.LinkNoExt" class="catalogue-item">
                     <div>
