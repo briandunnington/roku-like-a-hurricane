@@ -7,8 +7,8 @@
         <description>rokulikeahurricane.io RSS Feed</description>
         <language>en-us</language>
         <copyright>Copyright 2019 - Brian Dunnington</copyright>
-        <pubDate>Fri, 05 Apr 2019 07:31:17 GMT</pubDate>
-        <lastBuildDate>Fri, 05 Apr 2019 07:31:17 GMT</lastBuildDate>
+        <pubDate>Sun, 07 Apr 2019 09:52:30 GMT</pubDate>
+        <lastBuildDate>Sun, 07 Apr 2019 09:52:30 GMT</lastBuildDate>
 
         <item>
             <title>Proxying network requests</title>
@@ -106,7 +106,7 @@ if (parts.Length &gt; 1)
 
 <p>Tools > Rewrite</p>
 
-<p>Import the <a href="/charles_roku_proxy.xml">charles_roku_proxy.xml ruleset definition file</a>. It should add a <em>'Roku'</em> ruleset with the necessary rules to enable the proxying.</p>
+<p>Import the <a href="/charles_roku_proxy.xml">charles_roku_proxy.xml ruleset definition file</a>. It should add a <em>'Roku Proxy'</em> ruleset with the necessary rules to enable the proxying.</p>
 
 <p><img src="/img/proxy_charles_settings.png" /></p>
 
