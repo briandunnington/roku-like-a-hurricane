@@ -7,14 +7,14 @@
         <description>rokulikeahurricane.io RSS Feed</description>
         <language>en-us</language>
         <copyright>Copyright 2019 - Brian Dunnington</copyright>
-        <pubDate>Sun, 07 Apr 2019 09:52:30 GMT</pubDate>
-        <lastBuildDate>Sun, 07 Apr 2019 09:52:30 GMT</lastBuildDate>
+        <pubDate>Fri, 18 Dec 2020 06:48:44 GMT</pubDate>
+        <lastBuildDate>Fri, 18 Dec 2020 06:48:44 GMT</lastBuildDate>
 
         <item>
             <title>Proxying network requests</title>
             <link>http://192.168.1.139:52757/proxying_network_requests</link>
             <description><![CDATA[
-<p>Roku does not have built-in support for proxies, and the HTTP stack (<code>roUrlTransfer</code>) does not expose the necessary methods to manually construct a valid proxy request. There are two approaches to to get proxying working in spite of these limitations.</p>
+<p>Roku does not have built-in support for proxies, and the HTTP stack (<code>roUrlTransfer</code>) does not expose the necessary methods to manually construct a valid proxy request. There are two approaches to get proxying working in spite of these limitations.</p>
 
 <h2>System-level proxying</h2>
 
@@ -45,7 +45,7 @@
 <p>Include the following <code>configureRequestProxy()</code> function in your app. The function takes two arguments:</p>
 
 <ul>
-<li><code>request</code> - This should be your original <code>roUrlTransfer</code> object that has already had <code>SetUrl()</code> called on it. <em>(The url will be be munged to point to the proxy server but the original value will be preserved.)</em></li>
+<li><code>request</code> - This should be your original <code>roUrlTransfer</code> object that has already had <code>SetUrl()</code> called on it. <em>(The url will be munged to point to the proxy server but the original value will be preserved.)</em></li>
 <li><code>proxyAddress</code> - The IP address (and optional port) of your proxy server. Ex: <code>192.168.1.100:8888</code></li>
 </ul>
 
@@ -423,7 +423,7 @@ if (type(msg) = "roUrlEvent")
 end if
 </code></pre>
 
-<p>Note that if the status code is not in the 200-299 range, the body will be empty. You can change this behavior (so that you can get the full body for non-200 respones as well) by setting the <code>RetainBodyOnError(true)</code> method on the request</p>
+<p>Note that if the status code is not in the 200-299 range, the body will be empty. You can change this behavior (so that you can get the full body for non-200 responses as well) by setting the <code>RetainBodyOnError(true)</code> method on the request</p>
 
 <pre><code>port = CreateObject("roMessagePort")
 request = CreateObject("roUrlTransfer")
@@ -497,12 +497,12 @@ end if
 
 <p>As you can see, Roku's HTTP handling is quite different than many of the other implementations you might be familiar with. If all of this <code>roUrlTransfer</code> stuff is confusing, you might consider using one of the open-source libraries out there that wrap it all up into a more user-friendly package. A couple to consider are:</p>
 
-<p><a href="https://github.com/bvisin/roku-requests">roku-requests</a> - Pyton-inspired library that includes client-side caching. Lets you write code like:</p>
+<p><a href="https://github.com/bvisin/roku-requests">roku-requests</a> - Python-inspired library that includes client-side caching. Lets you write code like:</p>
 
 <pre><code>r = Requests().request("PUT", "https://httpbin.org/put", {"key":"value"})
 </code></pre>
 
-<p><a href="https://github.com/briandunnington/roku-fetch">roku-fetch</a> - Inspired by Javascripts's <code>fetch</code> functionality, you can write code like:</p>
+<p><a href="https://github.com/briandunnington/roku-fetch">roku-fetch</a> - Inspired by Javascript's <code>fetch</code> functionality, you can write code like:</p>
 
 <pre><code>response = fetch({
     url: "http://example.url",
@@ -662,7 +662,7 @@ my.props = props
             <title>Component initialization order</title>
             <link>http://192.168.1.139:52757/init_order</link>
             <description><![CDATA[
-<p>Roku's documenation contains <a href="https://sdkdocs.roku.com/display/sdkdoc/Component+Initialization+Order">a good article</a> about component initialization order. Specifically, it states:</p>
+<p>Roku's documentation contains <a href="https://sdkdocs.roku.com/display/sdkdoc/Component+Initialization+Order">a good article</a> about component initialization order. Specifically, it states:</p>
 
 <blockquote>
   <p>Instances of components defined in an XML file follow a well-defined initialization order when they are created.</p>
@@ -758,7 +758,7 @@ end sub
 <pre><code>My id is:
 </code></pre>
 
-<p>At the time that <code>init()</code> is called, any non-defaulf field values are not yet set, so <code>m.top.id</code> has no value.</p>
+<p>At the time that <code>init()</code> is called, any non-default field values are not yet set, so <code>m.top.id</code> has no value.</p>
 
 <p>Similarly, any values you set on <code>m.top</code> in <code>init()</code> could be overwritten when initialization is complete:</p>
 
@@ -811,7 +811,7 @@ My id is now: parent
 <li>SD (720x480)</li>
 </ul>
 
-<p><em>NOTE: This post is only going to focus on FHD and HD. Since SD is a different aspect ratio (4:3) and most Roku devices cannot output SD anyway, it is usually easier to omit explict support and let the Roku autoscale the UI to handle SD.</em></p>
+<p><em>NOTE: This post is only going to focus on FHD and HD. Since SD is a different aspect ratio (4:3) and most Roku devices cannot output SD anyway, it is usually easier to omit explicit support and let the Roku autoscale the UI to handle SD.</em></p>
 
 <p>Although you can provide explicit layouts for both HD and FHD, a much more common approach is to only provide the FHD layout and let the Roku downscale the UI to handle HD automatically. To do this, simply add this to your <code>manifest</code> file:</p>
 

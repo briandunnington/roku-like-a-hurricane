@@ -211,7 +211,7 @@ You can get the actual response body with the `GetString` method. This will be t
         json = ParseJSON(body)
     end if
 
-Note that if the status code is not in the 200-299 range, the body will be empty. You can change this behavior (so that you can get the full body for non-200 respones as well) by setting the `RetainBodyOnError(true)` method on the request
+Note that if the status code is not in the 200-299 range, the body will be empty. You can change this behavior (so that you can get the full body for non-200 responses as well) by setting the `RetainBodyOnError(true)` method on the request
 
     port = CreateObject("roMessagePort")
     request = CreateObject("roUrlTransfer")
@@ -281,12 +281,12 @@ The alternative is `GetResponseHeadersArray`. This returns and array of AAs inst
 
 As you can see, Roku's HTTP handling is quite different than many of the other implementations you might be familiar with. If all of this `roUrlTransfer` stuff is confusing, you might consider using one of the open-source libraries out there that wrap it all up into a more user-friendly package. A couple to consider are:
 
-[roku-requests][] - Pyton-inspired library that includes client-side caching. Lets you write code like:
+[roku-requests][] - Python-inspired library that includes client-side caching. Lets you write code like:
 
     r = Requests().request("PUT", "https://httpbin.org/put", {"key":"value"})
 
 
-[roku-fetch][] - Inspired by Javascripts's `fetch` functionality, you can write code like:
+[roku-fetch][] - Inspired by Javascript's `fetch` functionality, you can write code like:
 
     response = fetch({
         url: "http://example.url",

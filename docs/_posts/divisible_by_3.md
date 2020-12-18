@@ -9,7 +9,7 @@ Roku devices [support a few different resolutions][Resolutions] for displaying y
 * HD (1280x720)
 * SD (720x480)
 
-*NOTE: This post is only going to focus on FHD and HD. Since SD is a different aspect ratio (4:3) and most Roku devices cannot output SD anyway, it is usually easier to omit explict support and let the Roku autoscale the UI to handle SD.*
+*NOTE: This post is only going to focus on FHD and HD. Since SD is a different aspect ratio (4:3) and most Roku devices cannot output SD anyway, it is usually easier to omit explicit support and let the Roku autoscale the UI to handle SD.*
 
 Although you can provide explicit layouts for both HD and FHD, a much more common approach is to only provide the FHD layout and let the Roku downscale the UI to handle HD automatically. To do this, simply add this to your `manifest` file:
 

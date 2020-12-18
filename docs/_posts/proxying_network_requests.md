@@ -3,7 +3,7 @@ Date: 2019.04.05
 Summary: Some of the options available for inspecting network traffic from your Roku
 Category: Tools
 
-Roku does not have built-in support for proxies, and the HTTP stack (`roUrlTransfer`) does not expose the necessary methods to manually construct a valid proxy request. There are two approaches to to get proxying working in spite of these limitations.
+Roku does not have built-in support for proxies, and the HTTP stack (`roUrlTransfer`) does not expose the necessary methods to manually construct a valid proxy request. There are two approaches to get proxying working in spite of these limitations.
 
 ## System-level proxying
 
@@ -29,7 +29,7 @@ There is another way to proxy both HTTP and HTTPS requests, but it requires modi
 
 Include the following `configureRequestProxy()` function in your app. The function takes two arguments:
 
-* `request` - This should be your original `roUrlTransfer` object that has already had `SetUrl()` called on it. _(The url will be be munged to point to the proxy server but the original value will be preserved.)_
+* `request` - This should be your original `roUrlTransfer` object that has already had `SetUrl()` called on it. _(The url will be munged to point to the proxy server but the original value will be preserved.)_
 * `proxyAddress` - The IP address (and optional port) of your proxy server. Ex: `192.168.1.100:8888`
 
 <!-- force end of list -->

@@ -3,7 +3,7 @@ Date: 2018.12.18
 Summary: Understanding the component initialization order and some potential gotchas
 Category: Patterns
 
-Roku's documenation contains [a good article][RokuInitializationOrder] about component initialization order. Specifically, it states:
+Roku's documentation contains [a good article][RokuInitializationOrder] about component initialization order. Specifically, it states:
 
 > Instances of components defined in an XML file follow a well-defined initialization order when they are created.
 >
@@ -89,7 +89,7 @@ Assuming the `id` property was set in markup, you might be surprised to see the 
 
     My id is:
 
-At the time that `init()` is called, any non-defaulf field values are not yet set, so `m.top.id` has no value.
+At the time that `init()` is called, any non-default field values are not yet set, so `m.top.id` has no value.
 
 Similarly, any values you set on `m.top` in `init()` could be overwritten when initialization is complete:
 

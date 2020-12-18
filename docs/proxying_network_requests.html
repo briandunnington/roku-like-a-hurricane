@@ -64,7 +64,7 @@
 
             <h4>Category: <a href="categories/tools">Tools</a></h4>
 
-            <div class="language-vbnet"><p>Roku does not have built-in support for proxies, and the HTTP stack (<code>roUrlTransfer</code>) does not expose the necessary methods to manually construct a valid proxy request. There are two approaches to to get proxying working in spite of these limitations.</p>
+            <div class="language-vbnet"><p>Roku does not have built-in support for proxies, and the HTTP stack (<code>roUrlTransfer</code>) does not expose the necessary methods to manually construct a valid proxy request. There are two approaches to get proxying working in spite of these limitations.</p>
 
 <h2>System-level proxying</h2>
 
@@ -95,7 +95,7 @@
 <p>Include the following <code>configureRequestProxy()</code> function in your app. The function takes two arguments:</p>
 
 <ul>
-<li><code>request</code> - This should be your original <code>roUrlTransfer</code> object that has already had <code>SetUrl()</code> called on it. <em>(The url will be be munged to point to the proxy server but the original value will be preserved.)</em></li>
+<li><code>request</code> - This should be your original <code>roUrlTransfer</code> object that has already had <code>SetUrl()</code> called on it. <em>(The url will be munged to point to the proxy server but the original value will be preserved.)</em></li>
 <li><code>proxyAddress</code> - The IP address (and optional port) of your proxy server. Ex: <code>192.168.1.100:8888</code></li>
 </ul>
 

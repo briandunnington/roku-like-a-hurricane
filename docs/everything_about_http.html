@@ -294,7 +294,7 @@ if (type(msg) = "roUrlEvent")
 end if
 </code></pre>
 
-<p>Note that if the status code is not in the 200-299 range, the body will be empty. You can change this behavior (so that you can get the full body for non-200 respones as well) by setting the <code>RetainBodyOnError(true)</code> method on the request</p>
+<p>Note that if the status code is not in the 200-299 range, the body will be empty. You can change this behavior (so that you can get the full body for non-200 responses as well) by setting the <code>RetainBodyOnError(true)</code> method on the request</p>
 
 <pre><code>port = CreateObject("roMessagePort")
 request = CreateObject("roUrlTransfer")
@@ -368,12 +368,12 @@ end if
 
 <p>As you can see, Roku's HTTP handling is quite different than many of the other implementations you might be familiar with. If all of this <code>roUrlTransfer</code> stuff is confusing, you might consider using one of the open-source libraries out there that wrap it all up into a more user-friendly package. A couple to consider are:</p>
 
-<p><a href="https://github.com/bvisin/roku-requests">roku-requests</a> - Pyton-inspired library that includes client-side caching. Lets you write code like:</p>
+<p><a href="https://github.com/bvisin/roku-requests">roku-requests</a> - Python-inspired library that includes client-side caching. Lets you write code like:</p>
 
 <pre><code>r = Requests().request("PUT", "https://httpbin.org/put", {"key":"value"})
 </code></pre>
 
-<p><a href="https://github.com/briandunnington/roku-fetch">roku-fetch</a> - Inspired by Javascripts's <code>fetch</code> functionality, you can write code like:</p>
+<p><a href="https://github.com/briandunnington/roku-fetch">roku-fetch</a> - Inspired by Javascript's <code>fetch</code> functionality, you can write code like:</p>
 
 <pre><code>response = fetch({
     url: "http://example.url",
